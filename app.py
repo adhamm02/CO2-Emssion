@@ -4,15 +4,20 @@ import joblib
 import pandas as pd
 import random
 
+import os
+
 # ── Load Files Safely ─────────────────────────────────────
 def load_file(path):
     return joblib.load(path)
 
-model = load_file(r"D:\expert project\best_co2_emission_model.pkl")
-fuel_encoder = load_file(r"D:\expert project\fuel_encoder.pkl")
-transmission_encoder = load_file(r"D:\expert project\transmission_encoder.pkl")
-vehicle_class_encoder = load_file(r"D:\expert project\vehicle_class_encoder.pkl")
-scaler = load_file(r"D:\expert project\scalerf.pkl")
+# Dynamically resolve the directory where app.py is located
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+model = load_file(os.path.join(base_dir, "best_co2_emission_model.pkl"))
+fuel_encoder = load_file(os.path.join(base_dir, "fuel_encoder.pkl"))
+transmission_encoder = load_file(os.path.join(base_dir, "transmission_encoder.pkl"))
+vehicle_class_encoder = load_file(os.path.join(base_dir, "vehicle_class_encoder.pkl"))
+scaler = load_file(os.path.join(base_dir, "scalerf.pkl"))
 
 # ── Mapping ─────────────────────────────────────────────
 co2_map = {0: "High", 1: "Low", 2: "Medium"}
